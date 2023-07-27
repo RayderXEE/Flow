@@ -19,12 +19,7 @@ public class Flow<T,R> {
         T t;
         int i=0;
         while ((t = supplier.get())!=null) {
-            R r;
-            if (function!=null) {
-                r = function.apply(t);
-            } else {
-                r = (R) t;
-            }
+            R r = function != null ? function.apply(t) : (R) t;
             consumer.accept(r);
 
             if (limit!=0 && ++i>=limit) break;
